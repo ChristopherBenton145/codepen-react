@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Editor from "./Editor";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
@@ -11,6 +11,21 @@ function App() {
   const [html, setHtml] = useState("");
   const [css, setCSS] = useState("");
   const [js, setJs] = useState("");
+  const [srcDoc, setSrcDoc] = useState("");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSrcDoc(`
+      <html>
+        <body>${html}<body>
+        <style>${css}<style>
+        <script>${js}<script>
+      </html>
+    `);
+    }, 250);
+
+    return () => clearTimeout(timeout);
+  }, [html, css, js])
 
   return (
     <>
@@ -36,6 +51,7 @@ function App() {
       </div>
       <div className="pane">
         <iframe
+        srcDoc={srcDoc}
           title="output"
           sandbox="allow-scripts"
           frameBorder="0"
