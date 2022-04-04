@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import Editor from "./Editor";
+import useLocalStorage from "../hooks/useLocalStorage";
+
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "codemirror/mode/xml/xml";
@@ -8,9 +10,9 @@ import "codemirror/mode/css/css";
 import { Controlled } from "react-codemirror2";
 
 function App() {
-  const [html, setHtml] = useState("");
-  const [css, setCSS] = useState("");
-  const [js, setJs] = useState("");
+  const [html, setHtml] = useLocalStorage('html', '');
+  const [css, setCSS] = useLocalStorage('css', "");
+  const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState("");
 
   useEffect(() => {
