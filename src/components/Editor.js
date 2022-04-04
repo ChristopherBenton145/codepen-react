@@ -20,12 +20,13 @@ function Editor(props) {
       </div>
       <Controlled 
         onBeforeChange={handleChange}
-        valye={value}
+        value={value}
         className="code-mirror-wrapper"
         options={{
           lineWrapping: true,
           lint: true,
           mode: language,
+          theme: "material",
           lineNumbers:true
         }}
       />
